@@ -1,19 +1,19 @@
-import React, { useState } from 'react';
-import { Collapse, CollapseProps, Divider, Flex, Layout, Typography } from 'antd';
+import React from 'react';
+import { Collapse, CollapseProps, Flex, Layout, Typography } from 'antd';
 import ReactMarkdown from 'react-markdown'
 import { CollapseKey } from '../types/Types';
+import { Route, Link as RouterLink, Routes } from 'react-router-dom';
 
 
 
 
 const { Header, Footer, Sider, Content } = Layout;
 
-const { Text, Link, Title } = Typography;
+const { Text } = Typography;
 
 
 const backgroundPrimaryColorValue: string = "#222831"
 
-const FontPrimaryColorValue: string = "#DFD0B8"
 
 const headerStyle: React.CSSProperties = {
   textAlign: 'left',
@@ -22,9 +22,6 @@ const headerStyle: React.CSSProperties = {
   color: backgroundPrimaryColorValue,
   fontStyle: 'italic',
   fontWeight: 'lighter',
-  // color: FontPrim,aryColorValue,
-  // height: 64,
-  // lineHeight: '64px',
   backgroundColor: 'white',
 };
 
@@ -33,29 +30,20 @@ const siderStyle: React.CSSProperties = {
   width: "100%",
   padding: 20,
   color: "white",
-  // color: FontPrimaryColorValue,
-  // height: 64,
-  // lineHeight: '64px',
   backgroundColor: backgroundPrimaryColorValue,
 };
 
 const markupStyle: React.CSSProperties = {
   textAlign: 'left',
   width: "100%",
-  // padding: 20,
   fontSize: '80%',
-  // padding: 5,
-
   color: 'white',
-  // height: 64,
-  // lineHeight: '64px',
   backgroundColor: backgroundPrimaryColorValue,
 };
 
 const contentStyle: React.CSSProperties = {
   textAlign: 'left',
   minHeight: 120,
-  // color: FontPrimaryColorValue,
   backgroundColor: backgroundPrimaryColorValue,
 };
 
@@ -63,7 +51,6 @@ const cventStyle: React.CSSProperties = {
   textAlign: 'left',
   minHeight: 120,
   paddingRight: 20,
-  // color: FontPrimaryColorValue,
   backgroundColor: backgroundPrimaryColorValue,
 };
 
@@ -82,7 +69,7 @@ const footerStyle: React.CSSProperties = {
 const layoutStyle = {
   overflow: 'hidden',
   width: 'calc(100% - 8px)',
-  minHeight: "100vh",
+  minHeight: "80vh",
   maxWidth: 'calc(100% - 8px)',
   backgroundColor: backgroundPrimaryColorValue,
 
@@ -92,41 +79,34 @@ const layoutStyle = {
 
 function PageLayout() {
 
-  const mdItems: CollapseProps['items'] = [];
+  const mdItemsAll: CollapseProps['items'] = [];
+  const mdItemsRecent: CollapseProps['items'] = [];
+
 
 
   const jsonPath = require("C:/Users/Owner/Documents/Code/Notes_Research_Blog/src/data/notes/notes.json");
 
   const cvPath = require("C:/Users/Owner/Documents/Code/Notes_Research_Blog/src/data/cv/cv.json")
   jsonPath.map((article: any) => {
-
-
     let articleObject: CollapseKey = {
       key: article.key,
       label: article.title,
       children: <div style={markupStyle}>
         <div style={{ paddingLeft: 50 }}>
-          {/* <ReactMarkdown children={"\r\n\r\n---\r\n\r\n"} /> */}
-          {/* <p style={{ margin: 0, fontWeight: "light" }}>TOPIC</p> */}
           <p style={{ fontSize: 15, fontStyle: 'italic', paddingBottom: 0.5, margin: 0, fontWeight: "lighter" }}>{article.summary}</p>
-
           <ReactMarkdown children={"\r\n\r\n---\r\n\r\n"} />
-
           <ReactMarkdown children={article.content} />
           <div style={{ paddingTop: 5 }}>
           </div>
-
         </div>
-        {/* <ReactMarkdown children={"\r\n\r\n---\r\n\r\n"} /> */}
-
-
       </div>
     };
+    mdItemsAll.push(articleObject);
+  })
 
-    mdItems.push(articleObject);
-  }
 
-  )
+
+
   return (
     <Flex wrap >
       <Header style={headerStyle}>
@@ -139,20 +119,42 @@ function PageLayout() {
       </Header>
       <Layout style={layoutStyle} >
         <Sider width="25%" style={siderStyle}>
-          <Text code style={{ padding: "5px", fontSize: 20, width: "100%" }}>Notes</Text>
-          <Text code style={{ padding: "5px", fontSize: 20, width: "100%" }}>CV</Text>
+
+          <RouterLink to="/notes">
+            <Text code style={{ padding: "5px", fontSize: 20, width: "100%" }}>Notes</Text>
+          </RouterLink>
+
+          <RouterLink to="/cv">
+            <Text code style={{ padding: "5px", fontSize: 20, width: "100%" }}>CV</Text></RouterLink>
+
+
+          <RouterLink to="/">
+            <Text code style={{ padding: "5px", fontSize: 20, width: "100%" }}>Home</Text></RouterLink>
+
         </Sider>
         <Layout>
-
           <Content style={contentStyle}>
-            <h1 style={{ fontSize: 25, margin: 5, paddingBottom: 10, paddingTop: 20 }}> CV
-            </h1 >
-            <ReactMarkdown children={cvPath.content} />
 
-            <h1 style={{ fontSize: 25, margin: 5, paddingBottom: 10, paddingTop: 20 }}> Notes
-            </h1 >
+            <Routes>
+              <Route path="/" element={"HOMEPAGE"} />
+              <Route path="/cv" element={<>
+                <h1 style={{ fontSize: 25, margin: 5, paddingBottom: 10, paddingTop: 20 }}> CV </h1 >
+                <div style={{ paddingRight: 50, fontSize: 12 }}>
+                  <ReactMarkdown children={cvPath.content} />
+                </div>
+              </>} />
+              <Route path="/notes" element={<>
 
-            <Collapse defaultActiveKey={['1']} ghost items={mdItems} style={{ backgroundColor: backgroundPrimaryColorValue, padding: '0,0,0,0', fontSize: 12, paddingRight: 75 }} />
+                <h1 style={{ fontSize: 25, margin: 5, paddingBottom: 10, paddingTop: 20 }}> Notes
+                </h1 >
+
+                <Collapse defaultActiveKey={['1']} ghost items={mdItemsAll} style={{ backgroundColor: backgroundPrimaryColorValue, padding: '0,0,0,0', fontSize: 12, paddingRight: 75 }} />
+
+              </>} />
+
+            </Routes>
+
+
 
           </Content>
 
