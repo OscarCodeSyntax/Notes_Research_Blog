@@ -59,6 +59,13 @@ const contentStyle: React.CSSProperties = {
   backgroundColor: backgroundPrimaryColorValue,
 };
 
+const cventStyle: React.CSSProperties = {
+  textAlign: 'left',
+  minHeight: 120,
+  paddingRight: 20,
+  // color: FontPrimaryColorValue,
+  backgroundColor: backgroundPrimaryColorValue,
+};
 
 
 const footerStyle: React.CSSProperties = {
@@ -90,6 +97,7 @@ function PageLayout() {
 
   const jsonPath = require("C:/Users/Owner/Documents/Code/Notes_Research_Blog/src/data/notes/notes.json");
 
+  const cvPath = require("C:/Users/Owner/Documents/Code/Notes_Research_Blog/src/data/cv/cv.json")
   jsonPath.map((article: any) => {
 
 
@@ -137,6 +145,10 @@ function PageLayout() {
         <Layout>
 
           <Content style={contentStyle}>
+            <h1 style={{ fontSize: 25, margin: 5, paddingBottom: 10, paddingTop: 20 }}> CV
+            </h1 >
+            <ReactMarkdown children={cvPath.content} />
+
             <h1 style={{ fontSize: 25, margin: 5, paddingBottom: 10, paddingTop: 20 }}> Notes
             </h1 >
 
