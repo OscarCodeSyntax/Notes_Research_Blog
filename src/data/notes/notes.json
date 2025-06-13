@@ -1,0 +1,14 @@
+[
+    {
+        "key": "1",
+        "title": "2025.06.11 : This is the first test title",
+        "summary": "Can I use a RAG agent to produce prompts that I can use to train an LLM model.",
+        "content": "## **Pipeline Overview**\r\n1. **Build RAG Agent** (Retrieval + Generation)  \r\n2. **Generate Synthetic Dataset** (Query-Response Pairs)  \r\n3. **Fine-Tune a Model** (Llama 3, Mistral, etc.)  \r\n4. **Deploy & Compare** (RAG vs. Fine-Tuned Model)  \r\n\r\n## **When to Use This Approach?**\r\n✅ **Good for**:  \r\n- Static knowledge (e.g., company docs, textbooks).  \r\n- Reducing costs/latency for frequent queries.  \r\n\r\n❌ **Not ideal for**:  \r\n- Rapidly changing data (RAG is better for dynamic updates).  \r\n- Low-quality RAG responses (will propagate to fine-tuned model).  ### **Next Steps**\r\n1. **Start small**: Test with 100-1k query-response pairs.  \r\n2. **Iterate**: Improve dataset quality before full fine-tuning.  \r\n3. **Hybrid approach**: Use fine-tuned model + RAG for dynamic data.  \r\n\r\nWant help optimizing any part of this pipeline? 🚀"
+    },
+    {
+        "key": "2",
+        "summary": "Can I use a RAG agent to produce prompts that I can use to train an LLM model.",
+        "title": "2025.06.06 : This is the second test title",
+        "content": "Great! Let’s design a **step-by-step pipeline** to build a RAG agent, generate a training dataset from its responses, and fine-tune a model on that data. Below is a practical implementation plan with code snippets (using Python and popular tools).\r\n\r\n---\r\n\r\n## **Pipeline Overview**\r\n1. **Build RAG Agent** (Retrieval + Generation)  \r\n2. **Generate Synthetic Dataset** (Query-Response Pairs)  \r\n3. **Fine-Tune a Model** (Llama 3, Mistral, etc.)  \r\n4. **Deploy & Compare** (RAG vs. Fine-Tuned Model)  \r\n\r\n## **When to Use This Approach?**\r\n✅ **Good for**:  \r\n- Static knowledge (e.g., company docs, textbooks).  \r\n- Reducing costs/latency for frequent queries.  \r\n\r\n❌ **Not ideal for**:  \r\n- Rapidly changing data (RAG is better for dynamic updates).  \r\n- Low-quality RAG responses (will propagate to fine-tuned model).  \r\n\r\n---\r\n### **Next Steps**\r\n1. **Start small**: Test with 100-1k query-response pairs.  \r\n2. **Iterate**: Improve dataset quality before full fine-tuning.  \r\n3. **Hybrid approach**: Use fine-tuned model + RAG for dynamic data.  \r\n\r\nWant help optimizing any part of this pipeline? 🚀"
+    }
+]
