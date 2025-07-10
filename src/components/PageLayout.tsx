@@ -80,13 +80,15 @@ const layoutStyle = {
 function PageLayout() {
 
   const mdItemsAll: CollapseProps['items'] = [];
-  const mdItemsRecent: CollapseProps['items'] = [];
 
 
 
   const jsonPath = require("C:/Users/Owner/Documents/Code/Notes_Research_Blog/src/data/notes/notes.json");
 
   const cvPath = require("C:/Users/Owner/Documents/Code/Notes_Research_Blog/src/data/cv/cv.json")
+
+  const homeTextPath = require("C:/Users/Owner/Documents/Code/Notes_Research_Blog/src/data/homePage/homeText.json")
+
   jsonPath.map((article: any) => {
     let articleObject: CollapseKey = {
       key: article.key,
@@ -94,7 +96,7 @@ function PageLayout() {
       children: <div style={markupStyle}>
         <div style={{ paddingLeft: 50 }}>
           <p style={{ fontSize: 15, fontStyle: 'italic', paddingBottom: 0.5, margin: 0, fontWeight: "lighter" }}>{article.summary}</p>
-          <ReactMarkdown children={"\r\n\r\n---\r\n\r\n"} />
+          <ReactMarkdown children={"---"} />
           <ReactMarkdown children={article.content} />
           <div style={{ paddingTop: 5 }}>
           </div>
@@ -136,13 +138,15 @@ function PageLayout() {
           <Content style={contentStyle}>
 
             <Routes>
-              <Route path="/" element={"HOMEPAGE"} />
-              <Route path="/cv" element={<>
-                <h1 style={{ fontSize: 25, margin: 5, paddingBottom: 10, paddingTop: 20 }}> CV </h1 >
-                <div style={{ paddingRight: 50, fontSize: 12 }}>
-                  <ReactMarkdown children={cvPath.content} />
-                </div>
-              </>} />
+              <Route path="/" element={<ReactMarkdown children={homeTextPath.content} />} />
+              <Route path="/cv" element={
+                <>
+                  <h1 style={{ fontSize: 25, margin: 5, paddingBottom: 10, paddingTop: 20 }}> CV </h1 >
+                  <div style={{ paddingRight: 50, fontSize: 12 }}>
+                    <ReactMarkdown children={cvPath.content} />
+                  </div>
+                </>
+              } />
               <Route path="/notes" element={<>
 
                 <h1 style={{ fontSize: 25, margin: 5, paddingBottom: 10, paddingTop: 20 }}> Notes
