@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Collapse, CollapseProps, Flex, Layout, Typography } from 'antd';
 import ReactMarkdown from 'react-markdown'
 import { CollapseKey } from '../types/Types';
@@ -27,7 +27,6 @@ const siderStyle: React.CSSProperties = {
   textAlign: 'left',
   width: "100%",
   paddingTop: 30,
-  paddingRight: 60,
   paddingLeft: 20,
   color: "white",
   backgroundColor: backgroundPrimaryColorValue,
@@ -45,6 +44,8 @@ const contentStyle: React.CSSProperties = {
   textAlign: 'left',
   minHeight: 120,
   backgroundColor: backgroundPrimaryColorValue,
+  paddingLeft: 30,
+  paddingBottom: 20
 };
 
 const footerStyle: React.CSSProperties = {
@@ -64,6 +65,52 @@ const layoutStyle = {
 
 };
 
+function SiderObject() {
+
+  const [isMobile, setIsMobile] = useState(false)
+
+  //choose the screen size 
+  const handleResize = () => {
+    if (window.innerWidth < 750) {
+      setIsMobile(true)
+    } else {
+      setIsMobile(false)
+    }
+  }
+
+  // create an event listener
+  useEffect(() => {
+    window.addEventListener("resize", handleResize)
+  })
+
+  if (isMobile) {
+    return (
+      <div style={{ padding: "30px" }}>
+        <RouterLink to="/">
+          <Button icon={<Home2 />} ghost type="dashed" style={{ marginTop: "5px", marginBottom: "5px", fontSize: 14, width: "100%", }}>Home</Button></RouterLink>
+        <RouterLink to="/notes">
+          <Button ghost icon={<Notebook1 />} type="dashed" style={{ marginTop: "5px", marginBottom: "5px", fontSize: 14, width: "100%" }}>Notes</Button>
+        </RouterLink>
+        <RouterLink to="/cv">
+          <Button ghost icon={<FileMultiple />} type="dashed" style={{ marginTop: "5px", fontSize: 14, width: "100%" }}>CV</Button></RouterLink>
+      </div>
+    )
+  } else {
+    return (
+      <Sider width="15%" style={siderStyle}>
+        <RouterLink to="/">
+          <Button icon={<Home2 />} ghost type="dashed" style={{ marginTop: "5px", marginBottom: "5px", padding: "5px", fontSize: 14, width: "100%", }}>Home</Button></RouterLink>
+        <RouterLink to="/notes">
+          <Button ghost icon={<Notebook1 />} type="dashed" style={{ marginTop: "5px", marginBottom: "5px", padding: "5px", fontSize: 14, width: "100%" }}>Notes</Button>
+        </RouterLink>
+        <RouterLink to="/cv">
+          <Button ghost icon={<FileMultiple />} type="dashed" style={{ marginTop: "5px", fontSize: 14, width: "100%" }}>CV</Button></RouterLink>
+      </Sider>
+    )
+  }
+
+}
+
 function HomePage(mdItemsArray: CollapseProps['items'], homeTextPath: any) {
 
   const mdItemsFirst: CollapseProps['items'] = [];
@@ -73,12 +120,12 @@ function HomePage(mdItemsArray: CollapseProps['items'], homeTextPath: any) {
   }
 
   return (
-    <div style={{ backgroundColor: backgroundPrimaryColorValue, padding: '0,0,0,0', fontSize: 13, paddingRight: 75 }}>
+    <div style={{ backgroundColor: backgroundPrimaryColorValue, padding: '0,0,0,0', fontSize: 13, paddingRight: 0 }}>
       <h1 style={{ fontSize: 25, margin: 5, paddingBottom: 10, paddingTop: 20 }}> Welcome </h1 >
-      <div style={{ paddingRight: 50, paddingLeft: 25, fontSize: 14 }} >
+      <div style={{ paddingRight: 30, paddingLeft: 25, fontSize: 14 }} >
         <ReactMarkdown children={homeTextPath.content} />
       </div>
-      <div style={{ paddingLeft: 75, fontSize: 14, marginTop: -10 }} >
+      <div style={{ paddingLeft: 50, fontSize: 14, marginTop: -10 }} >
         {mdItemsFirst.length && mdItemsFirst[0]?.key && (
           <Collapse ghost items={mdItemsFirst} />
         )}
@@ -97,8 +144,6 @@ function PageLayout() {
   const cvPath = require("../data/cv/cv.json")
 
   const homeTextPath = require("../data/homePage/homeText.json")
-
-  const footerTextPath = require("../data/footer/footerText.json")
 
   notesPath.map((article: any) => {
     let articleObject: CollapseKey = {
@@ -137,15 +182,7 @@ function PageLayout() {
         </div>
       </div>
       <Layout style={layoutStyle} >
-        <Sider width="15%" style={siderStyle}>
-          <RouterLink to="/">
-            <Button icon={<Home2 />} ghost type="dashed" style={{ marginTop: "5px", marginBottom: "5px", padding: "5px", fontSize: 14, width: "100%", }}>Home</Button></RouterLink>
-          <RouterLink to="/notes">
-            <Button ghost icon={<Notebook1 />} type="dashed" style={{ marginTop: "5px", marginBottom: "5px", padding: "5px", fontSize: 14, width: "100%" }}>Notes</Button>
-          </RouterLink>
-          <RouterLink to="/cv">
-            <Button ghost icon={<FileMultiple />} type="dashed" style={{ marginTop: "5px", marginBottom: "5px", padding: "5px", fontSize: 14, width: "100%" }}>CV</Button></RouterLink>
-        </Sider>
+        {SiderObject()}
         <Layout>
           <Content style={contentStyle}>
             <Routes>
@@ -153,8 +190,8 @@ function PageLayout() {
                 HomePage(mdItemsArray, homeTextPath)} />
               <Route path="/cv" element={
                 <>
-                  <h1 style={{ fontSize: 25, margin: 5, paddingBottom: 10, paddingTop: 20 }}> CV </h1 >
-                  <div style={{ paddingRight: 50, fontSize: 13 }}>
+                  <h1 style={{ fontSize: 25, margin: 5, paddingBottom: 15, paddingTop: 20 }}> CV </h1 >
+                  <div style={{ paddingRight: 30, fontSize: 14, paddingBottom: 50 }}>
                     <ReactMarkdown children={cvPath.content} />
                   </div>
                 </>
@@ -162,7 +199,7 @@ function PageLayout() {
               <Route path="/notes" element={<>
                 <h1 style={{ fontSize: 25, margin: 5, paddingBottom: 10, paddingTop: 20 }}> Notes
                 </h1 >
-                <Collapse ghost items={mdItemsArray} style={{ backgroundColor: backgroundPrimaryColorValue, padding: '0,0,0,0', fontSize: 13, paddingRight: 75 }} />
+                <Collapse ghost items={mdItemsArray} style={{ backgroundColor: backgroundPrimaryColorValue, padding: '0,0,0,0', fontSize: 14, paddingRight: 30 }} />
               </>} />
             </Routes>
           </Content>

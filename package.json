@@ -18,7 +18,7 @@
     "web-vitals": "^2.1.4",
     "lineicons": "1.3.2"
   },
-  "homepage": "https://oscarcodesyntax.github.io/Notes_Research_Blog/",
+  "homepage": "https://oscarcodesyntax.github.io/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
