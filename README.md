@@ -8,6 +8,7 @@ node version v22.12.0
 
 ## Deploy to github pages with the "hompage" url in package.json:
 npm run deploy
+
 _This will push and merge the build folder to the gh-pages branch_
 
 ## Simulate github deploy with:
