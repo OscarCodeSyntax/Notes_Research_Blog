@@ -10,10 +10,10 @@ function App() {
       <ConfigProvider
         theme={{
           token: {
-            colorPrimary: "white",
             colorFillSecondary: "white",
             colorText: "white",
             colorSplit: "white",
+            colorIconHover: "white"
           },
           components: {
             Divider: {
