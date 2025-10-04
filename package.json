@@ -24,8 +24,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "predeploy": "npm run build"
   },
   "eslintConfig": {
     "extends": [
@@ -47,7 +46,6 @@
   },
   "devDependencies": {
     "@types/react-dom": "^19.1.6",
-    "gh-pages": "^6.3.0",
     "react-router-dom": "^7.6.2",
     "typescript": "^4.9.5"
   }
