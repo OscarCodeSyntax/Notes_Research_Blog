@@ -1,5 +1,5 @@
 {
-  "name": "notes_research_blog",
+  "name": "work_book",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -19,7 +19,7 @@
     "web-vitals": "^2.1.4",
     "gh-pages": "6.3.0"
   },
-  "homepage": "https://oscarcodesyntax.github.io/Work_Book/",
+  "homepage": "https://oscarcodesyntax.github.io/work_book/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
