@@ -1,5 +1,5 @@
-# Notes_Research_Blog
-One page place for my personal research, notes, blog and CV
+# Work Book
+A flexble static webpage that can be used to store notes and information. It reads from .md files.
 
 
 npm version 10.9.0
