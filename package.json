@@ -19,7 +19,7 @@
     "web-vitals": "^2.1.4",
     "gh-pages": "6.3.0"
   },
-  "homepage": "https://oscarcodesyntax.github.io/Notes_Research_Blog/",
+  "homepage": "https://oscarcodesyntax.github.io/Work_Book/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
