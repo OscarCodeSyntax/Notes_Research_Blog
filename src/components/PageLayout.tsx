@@ -191,7 +191,7 @@ function PageLayout() {
               <Route path="/cv" element={
                 <>
                   <h1 style={{ fontSize: 25, margin: 5, paddingBottom: 15, paddingTop: 20 }}> CV </h1 >
-                  <div style={{ paddingRight: 30, fontSize: 14, paddingBottom: 50 }}>
+                  <div style={{ fontSize: 14, paddingBottom: 50 }}>
                     <ReactMarkdown children={cvPath.content} />
                   </div>
                 </>
